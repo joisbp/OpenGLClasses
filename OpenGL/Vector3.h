@@ -1,6 +1,5 @@
 #pragma once
 
-
 template <class Type>
 class vec3
 {
@@ -28,6 +27,21 @@ public:
 		x = other.x;
 		y = other.y;
 		z = other.z;
+	}
+
+	Type X()
+	{
+		return x;
+	}
+
+	Type Y()
+	{
+		return y;
+	}
+
+	Type Z()
+	{
+		return z;
 	}
 
 	// Adding 2 vectors

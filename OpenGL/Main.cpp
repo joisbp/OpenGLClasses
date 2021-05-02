@@ -6,7 +6,6 @@ int main()
 {
 	vec3f fv;
 	vec3i iv;
-	
 
 	std::cout << fv;
 
