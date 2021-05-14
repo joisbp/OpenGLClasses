@@ -1,17 +1,16 @@
 #pragma once
+#include <iostream>
 
 template <class Type>
 class vec3
 {
 public:
 	Type magnitude;
-
-private:
 	Type x, y, z;
 
 public:
 	vec3() :
-		x(0), y(0), z(0)
+		x(0), y(0), z(0), magnitude(-1)
 	{
 		
 	}
@@ -27,21 +26,7 @@ public:
 		x = other.x;
 		y = other.y;
 		z = other.z;
-	}
-
-	Type X()
-	{
-		return x;
-	}
-
-	Type Y()
-	{
-		return y;
-	}
-
-	Type Z()
-	{
-		return z;
+		magnitude = other.magnitude;
 	}
 
 	// Adding 2 vectors
@@ -65,25 +50,65 @@ public:
 	//Scalar division
 	vec3 operator /(const float scalar)
 	{
-		return vec3(x / scalar, y / scalar, z / scalar);
+		return this * 1 / scalar;
+	}
+
+	void operator += (const vec3& other)
+	{
+		x = x + other.x;
+		y = y + other.y;
+		z = z + other.z;
+	}
+
+	void operator -= (const vec3& other)
+	{
+		x = x - other.x;
+		y = y - other.y;
+		z = z - other.z;
+	}
+
+	void operator *= (const float scalar)
+	{
+		x = x * scalar;
+		y = y * scalar;
+		z = z * scalar;
+	}
+
+	void operator /= (const float scalar)
+	{
+		float invS = 1 / scalar;
+		x = x * invS;
+		y = y * invS;
+		z = z * invS;
 	}
 
 	// Equals
 	bool operator ==(const vec3& other)
 	{
-		return (x == other.x && y == other.y);
+		return (x == other.x && y == other.y && z == other.z);
 	}
 
 	//Less than
 	bool operator < (const vec3& other)
 	{
-		return (x < other.x && y < other.y);
+		return (x < other.x && y < other.y && z < other.z);
 	}
 
 	//Greater than
 	bool operator >(const vec3 other)
 	{
 		return (other < this);
+	}
+
+	bool operator <= (const vec3& other)
+	{
+		return (x <= other.x && y <= other.y && z <= other.z);
+	}
+
+	//Greater than
+	bool operator >=(const vec3 other)
+	{
+		return (other <= this);
 	}
 
 	//Dot
@@ -93,21 +118,33 @@ public:
 	}
 
 	//Length
-	float Magnitude()
+	void Magnitude()
 	{
-		magnitude = sqrt(x * x + y * y + z * z);
+		magnitude = (Type)sqrt(x * x + y * y + z * z);
 	}
 
 	//return a new Normalized vector to unit length
 	vec3 Normalized() const 
 	{
+		if (magnitude == -1)
+			Magnitude();
+
+		if (magnitude == 0)
+			return ZERO;
+
 		return this / magnitude;
 	}
 
 	// Normalize the vector to unit length
 	void Normalize()
 	{
-		this / magnitude;
+		if (magnitude == -1)
+			Magnitude();
+
+		if (magnitude == 0)
+			return;
+
+		this /= magnitude;
 	}
 
 	// Accessor for x, y, z
@@ -163,6 +200,3 @@ public:
 
 	static const vec3 ZERO;
 };
-
-typedef vec3<int> vec3i;
-typedef vec3<float> vec3f;
