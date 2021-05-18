@@ -26,22 +26,22 @@ public:
 		magnitude = other.magnitude;
 	}
 
-	vec2 operator + (const vec2& other)
+	vec2 operator + (const vec2& other) const
 	{
 		return vec2(x + other.x, y + other.y);
 	}
 
-	vec2 operator - (const vec2& other)
+	vec2 operator - (const vec2& other) const
 	{
 		return vec2(x - other.x, y - other.y);
 	}
 
-	vec2 operator * (const float scalar)
+	vec2 operator * (const float scalar) const
 	{
 		return vec2(x * scalar, y * scalar);
 	}
 
-	vec2 operator / (const float scalar)
+	vec2 operator / (const float scalar) const
 	{
 		return this * (1 / scalar);
 	}
@@ -147,7 +147,7 @@ public:
 		0 P is on edge a, b
 	*/
 
-	static float EdgeFunction(const vec2& p, const vec2& a, const vec2& b)
+	static float EdgeFunction(const vec2& a, const vec2& b, const vec2& p)
 	{
 		vec2 e0 = p - a;
 		vec2 e1 = b - a;

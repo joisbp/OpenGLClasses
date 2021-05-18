@@ -30,27 +30,28 @@ public:
 	}
 
 	// Adding 2 vectors
-	vec3 operator + (const vec3& other)
+	vec3 operator + (const vec3& other) const
 	{
 		return vec3(x + other.x, y + other.y, z + other.z);
 	}
 
 	//Subtracting 2 vectors
-	vec3 operator - (const vec3& other)
+	vec3 operator - (const vec3& other) const
 	{
 		return vec3(x - other.x, y - other.y, z - other.z);
 	}
 
 	//Scalar multiplication of a vector
-	vec3 operator *(const float scalar)
+	vec3 operator * (const float scalar) const
 	{
 		return vec3(x * scalar, y * scalar, z * scalar);
 	}
 
 	//Scalar division
-	vec3 operator /(const float scalar)
+	vec3 operator / (const float scalar) const
 	{
-		return this * 1 / scalar;
+		float invScalar = 1 / scalar;
+		return *this * invScalar;
 	}
 
 	void operator += (const vec3& other)
@@ -83,30 +84,30 @@ public:
 	}
 
 	// Equals
-	bool operator ==(const vec3& other)
+	bool operator ==(const vec3& other) const
 	{
 		return (x == other.x && y == other.y && z == other.z);
 	}
 
 	//Less than
-	bool operator < (const vec3& other)
+	bool operator < (const vec3& other) const
 	{
 		return (x < other.x && y < other.y && z < other.z);
 	}
 
 	//Greater than
-	bool operator >(const vec3 other)
+	bool operator >(const vec3 other) const
 	{
 		return (other < this);
 	}
 
-	bool operator <= (const vec3& other)
+	bool operator <= (const vec3& other) const
 	{
 		return (x <= other.x && y <= other.y && z <= other.z);
 	}
 
 	//Greater than
-	bool operator >=(const vec3 other)
+	bool operator >=(const vec3 other) const
 	{
 		return (other <= this);
 	}
@@ -148,7 +149,7 @@ public:
 	}
 
 	// Accessor for x, y, z
-	Type operator [] (const int index)
+	Type operator [] (const int index) const
 	{
 		if (index == 0)
 			return x;
@@ -156,6 +157,12 @@ public:
 			return y;
 		if (index == 2)
 			return z;
+	}
+
+	// construct a vector 2 from x and y components
+	vec2<Type> GetXY() const
+	{
+		return vec2<Type>(x, y);
 	}
 
 	// to print out
@@ -187,7 +194,7 @@ public:
 		//	v2x	v2y	v2z	
 		result.x = v1.y * v2.z - v1.z * v2.y;
 		result.y = v1.x * v2.z - v2.x * v1.z;
-		result.z = v1.z * v2.x - v1.x * v2.z;
+		result.z = v1.x * v2.y - v1.y * v2.x;
 
 		return result;
 	}
