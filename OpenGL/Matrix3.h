@@ -133,6 +133,30 @@ public:
 		return result;
 	}
 
+
+	void operator * (const Matrix3& other, Matrix3& result)
+	{
+
+		vec3<Type> r0 = GetRow(0);
+		vec3<Type> r1 = GetRow(1);
+		vec3<Type> r2 = GetRow(2);
+
+		vec3<Type> c0 = other.GetCol(0);
+		vec3<Type> c1 = other.GetCol(1);
+		vec3<Type> c2 = other.GetCol(2);
+
+		result[0] = r0.Dot(c0);
+		result[1] = r0.Dot(c1);
+		result[2] = r0.Dot(c2);
+		result[3] = r1.Dot(c0);
+		result[4] = r1.Dot(c1);
+		result[5] = r1.Dot(c2);
+		result[6] = r2.Dot(c0);
+		result[7] = r2.Dot(c1);
+		result[8] = r2.Dot(c2);
+
+	}
+
 	vec3<Type> operator * (const vec3<Type>& vector)
 	{
 		vec3<Type> result;
@@ -146,6 +170,17 @@ public:
 		result.z = vector.Dot(col2);
 
 		return result;
+	}
+
+	void operator * (const vec3<Type>& vector, vec3<Type>& result)
+	{
+		vec3<Type> col0 = this->GetCol(0);
+		vec3<Type> col1 = this->GetCol(1);
+		vec3<Type> col2 = this->GetCol(2);
+
+		result.x = vector.Dot(col0);
+		result.y = vector.Dot(col1);
+		result.z = vector.Dot(col2);
 	}
 
 	Matrix3 Inverse()
