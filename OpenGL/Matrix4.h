@@ -165,14 +165,14 @@ public:
 		return result;
 	}
 
-	vec4<Type> operator * (const vec4<Type>& vector)
+	vec4<Type> operator * (const vec4<Type>& vector) const 
 	{
 		vec4<Type> result;
 		   
-		vec4<Type> col0 = GetCol(0);
-		vec4<Type> col1 = GetCol(1);
-		vec4<Type> col2 = GetCol(2);
-		vec4<Type> col3 = GetCol(3);
+		vec4<Type> col0 = this->GetCol(0);
+		vec4<Type> col1 = this->GetCol(1);
+		vec4<Type> col2 = this->GetCol(2);
+		vec4<Type> col3 = this->GetCol(3);
 
 		result.x = vector.Dot(col0);
 		result.y = vector.Dot(col1);

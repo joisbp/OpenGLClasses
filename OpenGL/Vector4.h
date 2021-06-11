@@ -19,6 +19,14 @@ public:
 		Magnitude();
 	}
 
+	vec4(const vec3<Type>& vector3)
+	{
+		x = vector3.x;
+		y = vector3.y;
+		z = vector3.z;
+		w = 1;
+	}
+
 	vec4(const vec4& other)
 	{
 		x = other.x;
@@ -30,25 +38,25 @@ public:
 	}
 
 	// Adding 2 vectors
-	vec4 operator + (const vec4& other)
+	vec4 operator + (const vec4& other) const
 	{
 		return vec4(x + other.x, y + other.y, z + other.z, w + other.w);
 	}
 
 	//Subtracting 2 vectors
-	vec4 operator - (const vec4& other)
+	vec4 operator - (const vec4& other) const
 	{
 		return vec4(x - other.x, y - other.y, z - other.z, w - other.w);
 	}
 
 	//Scalar multiplication of a vector
-	vec4 operator *(const float scalar)
+	vec4 operator *(const float scalar) const
 	{
 		return vec4(x * scalar, y * scalar, z * scalar, w * scalar);
 	}
 
 	//Scalar division
-	vec4 operator /(const float scalar)
+	vec4 operator /(const float scalar) const
 	{
 		return this * 1 / scalar;
 	}
@@ -126,7 +134,7 @@ public:
 		magnitude = (Type)sqrt(x * x + y * y + z * z + w* w);
 	}
 
-	float Dot(const vec4& other)
+	float Dot(const vec4& other) const
 	{
 		return (x * other.x + y * other.y + z * other.z + w * other.w);
 	}
@@ -153,6 +161,11 @@ public:
 			return;
 
 		this /= magnitude;
+	}
+
+	vec2<Type> GetXY() const
+	{
+		return vec2<Type>(x, y);
 	}
 
 	static const vec4 ZERO;

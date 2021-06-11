@@ -134,16 +134,16 @@ public:
 	}
 
 
-	void operator * (const Matrix3& other, Matrix3& result)
+	static void Multiply (const Matrix3& left, const Matrix3& right, Matrix3& result)
 	{
 
-		vec3<Type> r0 = GetRow(0);
-		vec3<Type> r1 = GetRow(1);
-		vec3<Type> r2 = GetRow(2);
+		vec3<Type> r0 = left.GetRow(0);
+		vec3<Type> r1 = left.GetRow(1);
+		vec3<Type> r2 = left.GetRow(2);
 
-		vec3<Type> c0 = other.GetCol(0);
-		vec3<Type> c1 = other.GetCol(1);
-		vec3<Type> c2 = other.GetCol(2);
+		vec3<Type> c0 = right.GetCol(0);
+		vec3<Type> c1 = right.GetCol(1);
+		vec3<Type> c2 = right.GetCol(2);
 
 		result[0] = r0.Dot(c0);
 		result[1] = r0.Dot(c1);
@@ -172,11 +172,11 @@ public:
 		return result;
 	}
 
-	void operator * (const vec3<Type>& vector, vec3<Type>& result)
+	static void Multiply (const Matrix3& matrix, const vec3<Type>& vector, vec3<Type>& result)
 	{
-		vec3<Type> col0 = this->GetCol(0);
-		vec3<Type> col1 = this->GetCol(1);
-		vec3<Type> col2 = this->GetCol(2);
+		vec3<Type> col0 = matrix.GetCol(0);
+		vec3<Type> col1 = matrix.GetCol(1);
+		vec3<Type> col2 = matrix.GetCol(2);
 
 		result.x = vector.Dot(col0);
 		result.y = vector.Dot(col1);
