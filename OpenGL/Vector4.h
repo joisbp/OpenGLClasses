@@ -168,5 +168,10 @@ public:
 		return vec2<Type>(x, y);
 	}
 
+	vec3<Type> GetXYZ() const
+	{
+		return vec3<Type>(x, y, z);
+	}
+
 	static const vec4 ZERO;
 };

@@ -401,6 +401,26 @@ public:
 		return adjoint.Transpose();
 	}
 
+	static void CreateProjectionMatrix(Matrix4& projectionMatrix, float right, float left, float top, float bottom, float near, float far)
+	{
+		projectionMatrix = ZERO;
+
+		// For x
+		projectionMatrix[0] = (2 * near) / (right - left);
+		projectionMatrix[8] = -((right + left) / (right - left));
+
+		//For y
+		projectionMatrix[5] = (2 * near) / (top - bottom);
+		projectionMatrix[9] = -((top + bottom) / (top - bottom));
+
+		//For z
+		projectionMatrix[10] = -((far + near) / (far - near));
+		projectionMatrix[14] = -((2 * far * near) / (far - near));
+
+		// For w
+		projectionMatrix[11] = -1;
+	}
+
 	static const Matrix4 ZERO;
 	static const Matrix4 IDENTITY;
 };
